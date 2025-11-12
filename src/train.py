@@ -11,7 +11,7 @@ from MD17Dataset import MD17        # the class you just made
 # -------------------------------
 # 1️⃣  Hyperparameters
 # -------------------------------
-MOLECULE = "azobenzene_dft"
+MOLECULE = "data/md17/benzene2018_dft"
 DATA_ROOT = "data/md17"
 CUTOFF = 5.0
 LR = 1e-3
@@ -85,7 +85,7 @@ for epoch in range(1, EPOCHS + 1):
         optimizer.zero_grad()
         E_pred, F_pred = compute_energy_and_forces(model, batch)
         loss = energy_force_loss(E_pred, batch.y, F_pred, batch.force)
-        
+
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
