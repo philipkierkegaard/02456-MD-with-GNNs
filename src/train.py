@@ -86,7 +86,7 @@ for epoch in range(1, EPOCHS + 1):
         E_pred, F_pred = compute_energy_and_forces(model, batch)
         loss = energy_force_loss(E_pred, batch.y, F_pred, batch.force)
 
-        if i % 50:
+        if i % 100 == 0:
             print(f"batch {i}, loss: {loss}")
 
         loss.backward()
