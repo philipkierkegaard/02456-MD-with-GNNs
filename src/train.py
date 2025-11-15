@@ -81,10 +81,13 @@ def energy_force_loss(E_pred, E_true, F_pred, F_true, rho=RHO):
 for epoch in range(1, EPOCHS + 1):
     model.train()
     total_loss = 0.0
-    for batch in train_loader:
+    for i, batch in enumerate(train_loader):
         optimizer.zero_grad()
         E_pred, F_pred = compute_energy_and_forces(model, batch)
         loss = energy_force_loss(E_pred, batch.y, F_pred, batch.force)
+
+        if i % 50:
+            print(f"batch {i}, loss: {loss}")
 
         loss.backward()
         optimizer.step()
@@ -92,7 +95,7 @@ for epoch in range(1, EPOCHS + 1):
 
     avg_train_loss = total_loss / len(train_loader)
 
-    print("avg train loss:", avg_train_loss)
+    
 
     # -------------------------------
     # Validation
