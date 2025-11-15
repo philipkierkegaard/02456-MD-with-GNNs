@@ -365,7 +365,6 @@ class PaiNN(nn.Module):
         atoms: torch.LongTensor,
         atom_positions: torch.FloatTensor,
         graph_indexes: torch.LongTensor,
-        edge_index
     ) -> torch.FloatTensor:
         """
         Forward pass of PaiNN. Includes the readout network highlighted in blue
