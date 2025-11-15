@@ -9,6 +9,11 @@
 #BSUB -W 24:00
 #BSUB -o logs/%J.out
 #BSUB -e logs/%J.err
+##BSUB -u s234873@dtu.dk
+### -- send notification at start -- 
+#BSUB -B
+### -- send notification at completion -- 
+#BSUB -N 
 
 # Load CUDA
 module load cuda/12.1
