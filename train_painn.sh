@@ -15,14 +15,9 @@
 ### -- send notification at completion -- 
 #BSUB -N 
 
-# Load CUDA
+# 1) Load CUDA (MUST be before python)
 module load cuda/12.1
 
-# Path to environment
-ENV=/work3/s234873/02456-MD-with-GNNs/painn_env
-
-# Activate
-source $ENV/bin/activate
-
-# Run script using venv python
-$ENV/bin/python src/train.py
+# 2) Run Python directly — DO NOT activate env
+/work3/s234873/02456-MD-with-GNNs/painn_env/bin/python \
+    -u src/train.py
