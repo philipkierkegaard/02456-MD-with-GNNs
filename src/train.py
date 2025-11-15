@@ -11,8 +11,8 @@ from MD17Dataset import MD17        # the class you just made
 # -------------------------------
 # 1️⃣  Hyperparameters
 # -------------------------------
-MOLECULE = "data/md17/benzene2018_dft"
-DATA_ROOT = "data/md17"
+MOLECULE = "benzene2018_dft"
+DATA_ROOT = "data"
 CUTOFF = 5.0
 LR = 1e-3
 EPOCHS = 200
@@ -20,7 +20,7 @@ RHO = 0.95             # weight for force loss
 BATCH_SIZE = 1         # variable-size molecules ⇒ batch = 1 is common
 
 #device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-device = torch.device("cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 # -------------------------------
