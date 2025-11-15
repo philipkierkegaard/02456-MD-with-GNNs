@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #BSUB -q gpuv100
 #BSUB -J painn_md17
 #BSUB -n 4
