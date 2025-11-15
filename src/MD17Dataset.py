@@ -2,7 +2,8 @@ import torch
 import os
 import numpy as np
 from torch_geometric.data import Data, Dataset
-from torch_geometric.loader import DataLoader
+from torch_geometric.nn import radius_graph
+
 
 class MD17(Dataset):
     """
@@ -11,18 +12,20 @@ class MD17(Dataset):
     """
     def __init__(self, root, molecule_name, cutoff=4.0, transform=None, pre_transform=None):
         super().__init__(root, transform, pre_transform)
+
         self.root = root
         self.molecule_name = molecule_name
         self.cutoff = cutoff
         self.file_path = os.path.join(root, f"{molecule_name}.npz")
 
-        # --- Load data from the npz file ---
+        # Load npz file
         data_npz = np.load(self.file_path)
-        self.R = data_npz["R"]     # [n_frames, n_atoms, 3]
-        self.F = data_npz["F"]     # [n_frames, n_atoms, 3]
-        self.E = data_npz["E"]     # [n_frames]
-        self.z = data_npz["z"]     # [n_atoms]
-        self.n_atoms = len(self.z)
+        self.R = torch.tensor(data_npz["R"], dtype=torch.float)    # [frames, atoms, 3]
+        self.F = torch.tensor(data_npz["F"], dtype=torch.float)    # [frames, atoms, 3]
+        self.E = torch.tensor(data_npz["E"], dtype=torch.float)    # [frames]
+        self.z = torch.tensor(data_npz["z"], dtype=torch.long)     # [atoms]
+
+        self.n_atoms = self.z.shape[0]
 
     def len(self):
         """Number of MD trajectory frames"""
@@ -30,48 +33,40 @@ class MD17(Dataset):
     
     def get(self, idx):
         """Return one molecular frame as a PyG Data object"""
-        pos = self.R[idx]
-        energy = self.E[idx]
-        forces = self.F[idx]
 
-        # --- Construct edges based on cutoff ---
-        dist = np.linalg.norm(pos[:, None, :] - pos[None, :, :], axis=-1)
-        mask = (dist < self.cutoff) & (dist > 1e-6)
-        edge_index = np.array(np.nonzero(mask))
-        edge_attr = dist[edge_index[0], edge_index[1]][:, None]
+        pos = self.R[idx]              # [n_atoms, 3]
+        energy = self.E[idx].unsqueeze(0)
+        forces = self.F[idx]           # [n_atoms, 3]
+        z = self.z                     # [n_atoms]
 
-        # --- Node features: atomic numbers (long type for embedding) ---
-        x = torch.tensor(self.z, dtype=torch.long)
+        # --- Compute edges via efficient radius_graph ---
+        edge_index = radius_graph(
+            pos,
+            r=self.cutoff,
+            loop=False
+        )   # shape [2, num_edges]
 
-        data = Data(
-            x=x,
-            pos=torch.tensor(pos, dtype=torch.float),
-            edge_index=torch.tensor(edge_index, dtype=torch.long),
-            edge_attr=torch.tensor(edge_attr, dtype=torch.float),
-            y=torch.tensor([energy], dtype=torch.float),
-            force=torch.tensor(forces, dtype=torch.float)
+        row, col = edge_index
+        edge_attr = torch.norm(pos[row] - pos[col], dim=-1).unsqueeze(-1)
+
+        return Data(
+            x=z,
+            pos=pos,
+            edge_index=edge_index,
+            edge_attr=edge_attr,
+            y=energy,        # shape [1]
+            force=forces     # shape [n_atoms, 3]
         )
-        return data
 
 
-
+# Optional test
 if __name__ == "__main__":
-    dataset = MD17(root="data/md17", molecule_name="azobenzene_dft")
+    dataset = MD17(root="data", molecule_name="benzene2018_dft", cutoff=5.0)
+    print("Dataset size:", len(dataset))
 
-    # Split into train / val sets
-    num_train = int(0.9 * len(dataset))
-    train_dataset = dataset[:num_train]
-    val_dataset   = dataset[num_train:]
-
-    # Create PyTorch Geometric DataLoaders
-    train_loader = DataLoader(train_dataset, batch_size=1, shuffle=True)
-    val_loader   = DataLoader(val_dataset, batch_size=1)
-
-    # Inspect one batch
-    for batch in train_loader:
-        print(batch)
-        print("Atoms:", batch.x.shape[0],
-              "| Edges:", batch.edge_index.shape[1],
-              "| Energy:", batch.y.item(),
-              "| Forces:", batch.force.shape)
-        break
+    data = dataset[0]
+    print(data)
+    print("Atoms:", data.x.shape[0],
+          "| Edges:", data.edge_index.shape[1],
+          "| Energy:", data.y.item(),
+          "| Forces:", data.force.shape)

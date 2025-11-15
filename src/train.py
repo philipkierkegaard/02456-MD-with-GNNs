@@ -19,7 +19,7 @@ EPOCHS = 200
 RHO = 0.95             # weight for force loss
 BATCH_SIZE = 1         # variable-size molecules ⇒ batch = 1 is common
 
-#device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
