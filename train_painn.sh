@@ -4,7 +4,7 @@
 #BSUB -n 1
 #BSUB -R "span[hosts=1]"
 #BSUB -R "rusage[mem=8GB]"
-#BSUB -M 10GB
+#BSUB -M 8GB
 #BSUB -gpu "num=1"
 #BSUB -W 24:00
 #BSUB -o logs/%J.out
