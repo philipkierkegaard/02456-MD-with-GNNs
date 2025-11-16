@@ -2,7 +2,6 @@ import torch
 import os
 import numpy as np
 from torch_geometric.data import Data, Dataset
-from torch_geometric.nn import radius_graph
 
 
 class MD17(Dataset):
@@ -18,7 +17,6 @@ class MD17(Dataset):
         self.cutoff = cutoff
         self.file_path = os.path.join(root, f"{molecule_name}.npz")
 
-        # Load npz file
         data_npz = np.load(self.file_path)
         self.R = torch.tensor(data_npz["R"], dtype=torch.float)    # [frames, atoms, 3]
         self.F = torch.tensor(data_npz["F"], dtype=torch.float)    # [frames, atoms, 3]
@@ -27,39 +25,25 @@ class MD17(Dataset):
 
         self.n_atoms = self.z.shape[0]
 
+
     def len(self):
-        """Number of MD trajectory frames"""
         return self.R.shape[0]
     
+    
     def get(self, idx):
-        """Return one molecular frame as a PyG Data object"""
-
-        pos = self.R[idx]              # [n_atoms, 3]
+        pos = self.R[idx].clone()      # [n_atoms, 3]
         energy = self.E[idx].unsqueeze(0)
-        forces = self.F[idx]           # [n_atoms, 3]
-        z = self.z                     # [n_atoms]
-
-        # --- Compute edges via efficient radius_graph ---
-        edge_index = radius_graph(
-            pos,
-            r=self.cutoff,
-            loop=False
-        )   # shape [2, num_edges]
-
-        row, col = edge_index
-        edge_attr = torch.norm(pos[row] - pos[col], dim=-1).unsqueeze(-1)
+        forces = self.F[idx]
+        z = self.z                      # atomic numbers
 
         return Data(
             x=z,
             pos=pos,
-            edge_index=edge_index,
-            edge_attr=edge_attr,
-            y=energy,        # shape [1]
-            force=forces     # shape [n_atoms, 3]
+            y=energy,        # energy for whole system
+            force=forces     # per-atom forces
         )
 
 
-# Optional test
 if __name__ == "__main__":
     dataset = MD17(root="data", molecule_name="benzene2018_dft", cutoff=5.0)
     print("Dataset size:", len(dataset))
@@ -67,6 +51,5 @@ if __name__ == "__main__":
     data = dataset[0]
     print(data)
     print("Atoms:", data.x.shape[0],
-          "| Edges:", data.edge_index.shape[1],
           "| Energy:", data.y.item(),
           "| Forces:", data.force.shape)
