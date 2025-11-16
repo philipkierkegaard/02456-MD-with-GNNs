@@ -8,9 +8,19 @@ import wandb   # ⭐ NEW
 from painn import PaiNN
 from MD17Dataset import MD17
 
+
+import sys, torch, torch_cluster
+print("Python:", sys.executable)
+print("Torch CUDA:", torch.version.cuda)
+print("torch-cluster:", torch_cluster.__file__)
+print("torch-cluster version:", torch_cluster.__version__)
+
+
+
 # -------------------------------
 # 1️⃣  Hyperparameters
 # -------------------------------
+
 MOLECULE = "benzene2018_dft"
 DATA_ROOT = "data"
 CUTOFF = 5.0
