@@ -79,19 +79,19 @@ optimizer = torch.optim.Adam(model.parameters(), lr=LR)
 def compute_energy_and_forces(model, batch):
     batch = batch.to(device)
 
-    batch.pos = batch.pos.clone().detach().requires_grad_(True)
+    pos = batch.pos.clone().detach().requires_grad_(True)
 
-    atomic_E = model(batch.x.long(), batch.pos, batch.batch)
-    total_E = scatter_sum(atomic_E, batch.batch, dim=0)  # per molecule
+    atomic_E = model(batch.x.long(), pos, batch.batch)
+    total_E = scatter_sum(atomic_E, batch.batch, dim=0)
 
-    # Forces: negative gradient of energy wrt positions
     total_F = -torch.autograd.grad(
         outputs=total_E.sum(),
-        inputs=batch.pos,
+        inputs=pos,
         create_graph=True
     )[0]
 
     return total_E, total_F
+
 
 
 def energy_force_loss(E_pred, E_true, F_pred, F_true, rho=RHO):
@@ -129,21 +129,22 @@ for epoch in range(1, EPOCHS + 1):
     # Validation
     # -------------------------------
     model.eval()
-    with torch.no_grad():
-        val_loss = 0.0
-        mae_E, mae_F = 0.0, 0.0
+    val_loss = 0.0
+    mae_E, mae_F = 0.0, 0.0
 
-        for batch in val_loader:
+    for batch in val_loader:
+        # we MUST allow gradients here because we use autograd.grad
+        with torch.enable_grad():
             E_pred, F_pred = compute_energy_and_forces(model, batch)
             loss = energy_force_loss(E_pred, batch.y, F_pred, batch.force)
 
-            val_loss += loss.item()
-            mae_E += torch.mean(torch.abs(E_pred - batch.y)).item()
-            mae_F += torch.mean(torch.abs(F_pred - batch.force)).item()
+        val_loss += loss.item()
+        mae_E += torch.mean(torch.abs(E_pred - batch.y)).item()
+        mae_F += torch.mean(torch.abs(F_pred - batch.force)).item()
 
-        val_loss /= len(val_loader)
-        mae_E   /= len(val_loader)
-        mae_F   /= len(val_loader)
+    val_loss /= len(val_loader)
+    mae_E   /= len(val_loader)
+    mae_F   /= len(val_loader)
 
     print(
         f"Epoch {epoch:03d} | "
