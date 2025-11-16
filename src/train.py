@@ -78,11 +78,13 @@ optimizer = torch.optim.Adam(model.parameters(), lr=LR)
 # -------------------------------
 def compute_energy_and_forces(model, batch):
     batch = batch.to(device)
-    batch.pos.requires_grad_(True)
+
+    batch.pos = batch.pos.clone().detach().requires_grad_(True)
 
     atomic_E = model(batch.x.long(), batch.pos, batch.batch)
-    total_E = scatter_sum(atomic_E, batch.batch, dim=0)
+    total_E = scatter_sum(atomic_E, batch.batch, dim=0)  # per molecule
 
+    # Forces: negative gradient of energy wrt positions
     total_F = -torch.autograd.grad(
         outputs=total_E.sum(),
         inputs=batch.pos,
