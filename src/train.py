@@ -25,7 +25,7 @@ MOLECULE = "azobenzene_dft"
 DATA_ROOT = "data"
 CUTOFF = 5.0
 LR = 3e-4
-EPOCHS = 50
+EPOCHS = 150
 RHO = 0.98
 BATCH_SIZE = 1
 
@@ -166,14 +166,14 @@ for epoch in range(1, EPOCHS + 1):
     # Save best model to W&B
     if val_loss < best_val_loss:
         best_val_loss = val_loss
-        torch.save(model.state_dict(), "best_model.pth")
+        torch.save(model.state_dict(), f"best_model_{MOLECULE}.pth")
         wandb.save("best_model.pth")
         print("💾 Saved new BEST model!")
 
 # -------------------------------
 # Final save
 # -------------------------------
-torch.save(model.state_dict(), "final_model.pth")
+torch.save(model.state_dict(), f"final_model_{MOLECULE}.pth")
 wandb.save("final_model.pth")
 
 print("🎉 Training complete!")

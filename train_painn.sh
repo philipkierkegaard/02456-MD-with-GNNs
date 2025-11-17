@@ -3,10 +3,10 @@
 #BSUB -J painn_md17
 #BSUB -n 4
 #BSUB -R "span[hosts=1]"
-#BSUB -R "rusage[mem=8GB]"
-#BSUB -M 9GB
+#BSUB -R "rusage[mem=16GB]"
+#BSUB -M 16GB
 #BSUB -gpu "num=1"
-#BSUB -W 48:00
+#BSUB -W 36:00
 #BSUB -o logs/%J.out
 #BSUB -e logs/%J.err
 ##BSUB -u s234873@dtu.dk
