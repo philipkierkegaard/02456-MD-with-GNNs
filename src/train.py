@@ -21,7 +21,7 @@ print("torch-cluster version:", torch_cluster.__version__)
 # 1️⃣  Hyperparameters
 # -------------------------------
 
-MOLECULE = "benzene2018_dft"
+MOLECULE = "azobenzene_dft"
 DATA_ROOT = "data"
 CUTOFF = 5.0
 LR = 3e-4
@@ -163,7 +163,7 @@ for epoch in range(1, EPOCHS + 1):
         "lr": optimizer.param_groups[0]["lr"],
     })
 
-    # ⭐ Save best model to W&B
+    # Save best model to W&B
     if val_loss < best_val_loss:
         best_val_loss = val_loss
         torch.save(model.state_dict(), "best_model.pth")
