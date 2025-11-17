@@ -6,7 +6,7 @@
 #BSUB -R "rusage[mem=16GB]"
 #BSUB -M 16GB
 #BSUB -gpu "num=1"
-#BSUB -W 36:00
+#BSUB -W 24:00
 #BSUB -o logs/%J.out
 #BSUB -e logs/%J.err
 ##BSUB -u s234873@dtu.dk
