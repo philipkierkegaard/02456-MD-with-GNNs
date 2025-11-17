@@ -21,7 +21,7 @@ print("torch-cluster version:", torch_cluster.__version__)
 # 1️⃣  Hyperparameters
 # -------------------------------
 
-MOLECULE = "azobenzene_dft"
+MOLECULE = "paracetamol_dft"
 DATA_ROOT = "data"
 CUTOFF = 5.0
 LR = 3e-4
@@ -57,7 +57,7 @@ train_dataset = dataset[:num_train]
 val_dataset   = dataset[num_train:]
 
 train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
-val_loader   = DataLoader(val_dataset,   batch_size=BATCH_SIZE)
+val_loader   = DataLoader(val_dataset, batch_size=BATCH_SIZE)
 
 # -------------------------------
 # Model & optimizer
