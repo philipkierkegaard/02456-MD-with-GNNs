@@ -15,30 +15,17 @@
 ### -- send notification at completion -- 
 #BSUB -N 
 
-# ---------------------------------------------
-# 1) Clean modules – VERY important at DTU HPC
-# ---------------------------------------------
 module purge
 
-# ---------------------------------------------
-# 2) Load CUDA needed by torch-scatter/cluser
-# ---------------------------------------------
 module load cuda/12.1
 
-# ---------------------------------------------
-# 3) Activate venv
-# ---------------------------------------------
 ENV=/work3/s234873/02456-MD-with-GNNs/painn_env
 source $ENV/bin/activate
 
-# ---------------------------------------------
-# 4) Force venv to override system Python
-# ---------------------------------------------
 export PATH=$ENV/bin:$PATH
 export PYTHONPATH=$ENV/lib/python3.12/site-packages:$PYTHONPATH
 export LD_LIBRARY_PATH=$ENV/lib:$LD_LIBRARY_PATH
 
-# (Optional debugging)
 echo "Using Python: $(which python)"
 echo "Python version: $(python --version)"
 echo "PYTHONPATH: $PYTHONPATH"
