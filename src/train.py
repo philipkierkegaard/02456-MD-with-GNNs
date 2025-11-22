@@ -87,7 +87,7 @@ def compute_energy_and_forces(model, batch):
     total_F = -torch.autograd.grad(
         outputs=total_E.sum(),
         inputs=pos,
-        #create_graph=True
+        create_graph=True
     )[0]
 
     return total_E, total_F
