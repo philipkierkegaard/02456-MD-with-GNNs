@@ -26,7 +26,8 @@ CUTOFF = 5.0
 LR = 3e-4
 EPOCHS = 150
 RHO = 0.98
-BATCH_SIZE = 1
+BATCH_SIZE = 128
+NUM_WORKERS = 4
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
@@ -55,8 +56,8 @@ num_train = int(0.9 * len(dataset))
 train_dataset = dataset[:num_train]
 val_dataset   = dataset[num_train:]
 
-train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
-val_loader   = DataLoader(val_dataset, batch_size=BATCH_SIZE)
+train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=NUM_WORKERS)
+val_loader   = DataLoader(val_dataset, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS)
 
 # -------------------------------
 # Model & optimizer
@@ -86,7 +87,7 @@ def compute_energy_and_forces(model, batch):
     total_F = -torch.autograd.grad(
         outputs=total_E.sum(),
         inputs=pos,
-        create_graph=True
+        #create_graph=True
     )[0]
 
     return total_E, total_F
