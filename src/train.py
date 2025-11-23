@@ -26,7 +26,7 @@ CUTOFF = 5.0
 LR = 3e-4
 EPOCHS = 200
 RHO = 0.98
-BATCH_SIZE = 32
+BATCH_SIZE = 8
 NUM_WORKERS = 4
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
