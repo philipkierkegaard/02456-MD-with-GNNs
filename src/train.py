@@ -23,10 +23,10 @@ print("torch-cluster version:", torch_cluster.__version__)
 MOLECULE = "paracetamol_dft"
 DATA_ROOT = "data"
 CUTOFF = 5.0
-LR = 3e-4
-EPOCHS = 200
-RHO = 0.98
-BATCH_SIZE = 8
+LR = 1e-3
+EPOCHS = 300
+RHO = 0.95
+BATCH_SIZE = 10
 NUM_WORKERS = 4
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -51,6 +51,7 @@ wandb.init(
 # -------------------------------
 # Dataset & loaders
 # -------------------------------
+
 dataset = MD17(root=DATA_ROOT, molecule_name=MOLECULE, cutoff=CUTOFF)
 num_train = int(0.9 * len(dataset))
 train_dataset = dataset[:num_train]
