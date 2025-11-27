@@ -19,11 +19,11 @@ print("torch-cluster version:", torch_cluster.__version__)
 # 1️⃣  Hyperparameters
 # -------------------------------
 
-MOLECULE = "paracetamol_dft"
+MOLECULE = "benzene2018_dft"
 DATA_ROOT = "data"
 CUTOFF = 5.0
 LR = 1e-3
-EPOCHS = 300
+EPOCHS = 400
 RHO = 0.95
 BATCH_SIZE = 10
 NUM_WORKERS = 4
@@ -166,15 +166,15 @@ for epoch in range(1, EPOCHS + 1):
     # Save best model to W&B
     if val_loss < best_val_loss:
         best_val_loss = val_loss
-        torch.save(model.state_dict(), f"best_model_{MOLECULE}.pth")
+        torch.save(model.state_dict(), f"best_model_{MOLECULE}_{EPOCHS}epochs.pth")
         wandb.save("best_model.pth")
         print("💾 Saved new BEST model!")
 
 # -------------------------------
 # Final save
 # -------------------------------
-torch.save(model.state_dict(), f"final_model_{MOLECULE}.pth")
-wandb.save("final_model.pth")
+torch.save(model.state_dict(), f"final_model_{MOLECULE}_{EPOCHS}.pth")
+wandb.save(f"final_model_{MOLECULE}_{EPOCHS}.pth")
 
 print("🎉 Training complete!")
 wandb.finish()
