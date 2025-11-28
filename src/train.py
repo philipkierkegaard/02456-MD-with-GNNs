@@ -36,7 +36,8 @@ print(f"Using device: {device}")
 # ⭐ 2️⃣ Initialize W&B
 # -------------------------------
 wandb.init(
-    project="painn-md17",
+    entity = "lyngsberg-danmarks-tekniske-universitet-dtu",
+    project="DeepLearningProject",
     name=f"painn-{MOLECULE}",
     config={
         "molecule": MOLECULE,
@@ -49,7 +50,7 @@ wandb.init(
 )
 
 # -------------------------------
-# Dataset & loaders
+# ataset & loaders
 # -------------------------------
 dataset = MD17(root=DATA_ROOT, molecule_name=MOLECULE, cutoff=CUTOFF)
 num_train = int(0.9 * len(dataset))
