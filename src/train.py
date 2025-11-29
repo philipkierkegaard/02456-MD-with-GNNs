@@ -20,7 +20,7 @@ print("torch-cluster version:", torch_cluster.__version__)
 # -------------------------------
 
 MOLECULE = "md17_ethanol"
-DATA_ROOT = "data/md17"
+DATA_ROOT = "data"
 CUTOFF = 5.0
 LR = 1e-3
 EPOCHS = 400
