@@ -19,7 +19,7 @@ print("torch-cluster version:", torch_cluster.__version__)
 # 1️⃣  Hyperparameters
 # -------------------------------
 
-MOLECULE = "benzene2018_dft"
+MOLECULE = "azobenzene_dft"
 DATA_ROOT = "data"
 CUTOFF = 5.0
 LR = 1e-3
