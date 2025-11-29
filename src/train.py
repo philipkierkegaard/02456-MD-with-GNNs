@@ -19,8 +19,8 @@ print("torch-cluster version:", torch_cluster.__version__)
 # 1️⃣  Hyperparameters
 # -------------------------------
 
-MOLECULE = "azobenzene_dft"
-DATA_ROOT = "data"
+MOLECULE = "md17_ethanol"
+DATA_ROOT = "data/md17"
 CUTOFF = 5.0
 LR = 1e-3
 EPOCHS = 400
