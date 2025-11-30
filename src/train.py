@@ -116,6 +116,9 @@ for epoch in range(1, EPOCHS + 1):
         loss = energy_force_loss(E_pred, batch.y, F_pred, batch.force)
 
         loss.backward()
+
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+
         optimizer.step()
         total_loss += loss.item()
 

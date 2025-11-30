@@ -79,7 +79,7 @@ class SinusoidalRBFLayer(nn.Module):
                 where * is the size of the input (the distances).
         """
         distances = distances.unsqueeze(-1)
-        return torch.sin(self.freqs * distances) / distances
+        return torch.sin(self.freqs * distances) / (distances + 1e-8)
 
 
 
@@ -406,7 +406,7 @@ class PaiNN(nn.Module):
         rel_dist = torch.linalg.vector_norm(rel_pos, dim=1)                         # [num_possible_edges]
 
         # Relative directions, cosine cutted distances, and rbf features
-        rel_dir = rel_pos / rel_dist.unsqueeze(-1)                                  # [num_edges, 3]
+        rel_dir = rel_pos / (rel_dist.unsqueeze(-1) + 1e-8)                                # [num_edges, 3]
         rel_dist_cut = self.cosine_cut(rel_dist)                                    # [num_edges]
         rbf_features = self.radial_basis(rel_dist)                                  # [num_edges, num_rbf_features]
 
