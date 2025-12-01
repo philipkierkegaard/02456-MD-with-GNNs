@@ -1,0 +1,18 @@
+/home/lyngsberg/miniconda3/envs/deepLearning/lib/python3.12/site-packages/torch/cuda/__init__.py:283: UserWarning:
+    Found GPU0 NVIDIA GeForce GTX 1050 Ti with Max-Q Design which is of cuda capability 6.1.
+    Minimum and Maximum cuda capability supported by this version of PyTorch is
+    (7.0) - (12.0)
+
+  warnings.warn(
+/home/lyngsberg/miniconda3/envs/deepLearning/lib/python3.12/site-packages/torch/cuda/__init__.py:304: UserWarning:
+    Please install PyTorch with a following CUDA
+    configurations:  12.6 following instructions at
+    https://pytorch.org/get-started/locally/
+
+  warnings.warn(matched_cuda_warn.format(matched_arches))
+/home/lyngsberg/miniconda3/envs/deepLearning/lib/python3.12/site-packages/torch/cuda/__init__.py:326: UserWarning:
+NVIDIA GeForce GTX 1050 Ti with Max-Q Design with CUDA capability sm_61 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_70 sm_75 sm_80 sm_86 sm_90 sm_100 sm_120.
+If you want to use the NVIDIA GeForce GTX 1050 Ti with Max-Q Design GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(

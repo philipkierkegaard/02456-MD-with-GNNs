@@ -1,0 +1,52 @@
+_wandb:
+    value:
+        cli_version: 0.23.0
+        e:
+            ad9hika3dq5p0up6hufmscdr2cy4t0ph:
+                codePath: src/train_baysian.py
+                codePathLocal: src/train_baysian.py
+                email: Eliasrasmussen12345@gmail.com
+                executable: /home/lyngsberg/miniconda3/envs/deepLearning/bin/python
+                git:
+                    commit: 98f7ca87d88acba8b965fc9e7fe0ff848565e110
+                    remote: https://github.com/philipkierkegaard/02456-MD-with-GNNs
+                host: DESKTOP-KTB5R6K
+                os: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39
+                program: /home/lyngsberg/deepLearning/02456-MD-with-GNNs/src/train_baysian.py
+                python: CPython 3.12.11
+                root: /home/lyngsberg/deepLearning/02456-MD-with-GNNs
+                startedAt: "2025-11-30T20:18:34.293048Z"
+                writerId: ad9hika3dq5p0up6hufmscdr2cy4t0ph
+        m: []
+        python_version: 3.12.11
+        t:
+            "1":
+                - 1
+                - 11
+                - 49
+                - 77
+            "2":
+                - 1
+                - 11
+                - 49
+                - 77
+            "3":
+                - 13
+                - 16
+            "4": 3.12.11
+            "5": 0.23.0
+            "6": 4.57.0
+            "12": 0.23.0
+            "13": linux-x86_64
+batch_size:
+    value: 1
+cutoff:
+    value: 5
+epochs:
+    value: 50
+lr:
+    value: 0.0003
+molecule:
+    value: benzene2018_dft
+rho:
+    value: 0.98

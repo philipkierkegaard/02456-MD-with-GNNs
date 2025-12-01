@@ -1,0 +1,68 @@
+_wandb:
+    value:
+        cli_version: 0.23.0
+        e:
+            2i64fkc7oi3aq2chz8u36do30uxbmrkz:
+                codePath: src/train_baysian.py
+                codePathLocal: src/train_baysian.py
+                cpu_count: 6
+                cpu_count_logical: 12
+                cudaVersion: "12.0"
+                disk:
+                    /:
+                        total: "1081101176832"
+                        used: "150130999296"
+                email: Eliasrasmussen12345@gmail.com
+                executable: /home/lyngsberg/miniconda3/envs/deepLearning/bin/python
+                git:
+                    commit: 98f7ca87d88acba8b965fc9e7fe0ff848565e110
+                    remote: https://github.com/philipkierkegaard/02456-MD-with-GNNs
+                gpu: NVIDIA GeForce GTX 1050 Ti with Max-Q Design
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Pascal
+                      memoryTotal: "4294967296"
+                      name: NVIDIA GeForce GTX 1050 Ti with Max-Q Design
+                      uuid: GPU-e602dbe2-dd99-6d8a-834e-2d4415ce4df5
+                host: DESKTOP-KTB5R6K
+                memory:
+                    total: "16619081728"
+                os: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39
+                program: /home/lyngsberg/deepLearning/02456-MD-with-GNNs/src/train_baysian.py
+                python: CPython 3.12.11
+                root: /home/lyngsberg/deepLearning/02456-MD-with-GNNs
+                startedAt: "2025-11-30T20:19:05.268Z"
+                writerId: 2i64fkc7oi3aq2chz8u36do30uxbmrkz
+        m: []
+        python_version: 3.12.11
+        t:
+            "1":
+                - 1
+                - 11
+                - 49
+                - 77
+            "2":
+                - 1
+                - 11
+                - 49
+                - 77
+            "3":
+                - 13
+                - 16
+            "4": 3.12.11
+            "5": 0.23.0
+            "6": 4.57.0
+            "12": 0.23.0
+            "13": linux-x86_64
+batch_size:
+    value: 1
+cutoff:
+    value: 5
+epochs:
+    value: 50
+lr:
+    value: 0.0003
+molecule:
+    value: benzene2018_dft
+rho:
+    value: 0.98

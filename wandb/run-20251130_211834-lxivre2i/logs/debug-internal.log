@@ -1,0 +1,11 @@
+{"time":"2025-11-30T21:18:34.600970924+01:00","level":"INFO","msg":"stream: starting","core version":"0.23.0"}
+{"time":"2025-11-30T21:18:35.782297588+01:00","level":"INFO","msg":"stream: created new stream","id":"lxivre2i"}
+{"time":"2025-11-30T21:18:35.782492924+01:00","level":"INFO","msg":"handler: started","stream_id":"lxivre2i"}
+{"time":"2025-11-30T21:18:35.782660906+01:00","level":"INFO","msg":"stream: started","id":"lxivre2i"}
+{"time":"2025-11-30T21:18:35.78277888+01:00","level":"INFO","msg":"writer: started","stream_id":"lxivre2i"}
+{"time":"2025-11-30T21:18:35.782894348+01:00","level":"INFO","msg":"sender: started","stream_id":"lxivre2i"}
+{"time":"2025-11-30T21:18:36.345142532+01:00","level":"INFO","msg":"stream: closing","id":"lxivre2i"}
+{"time":"2025-11-30T21:18:37.322228381+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-30T21:18:37.741571277+01:00","level":"INFO","msg":"handler: closed","stream_id":"lxivre2i"}
+{"time":"2025-11-30T21:18:37.741908363+01:00","level":"INFO","msg":"sender: closed","stream_id":"lxivre2i"}
+{"time":"2025-11-30T21:18:37.742054319+01:00","level":"INFO","msg":"stream: closed","id":"lxivre2i"}
