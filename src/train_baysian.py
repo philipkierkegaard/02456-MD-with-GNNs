@@ -29,6 +29,7 @@ RHO = 0.98
 BATCH_SIZE = 1
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#device = torch.device('cpu')
 print(f"Using device: {device}")
 
 # ============================================================
