@@ -1,0 +1,39 @@
+{
+  "os": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "CPython 3.12.11",
+  "startedAt": "2025-11-30T20:22:59.350984Z",
+  "program": "/home/lyngsberg/deepLearning/02456-MD-with-GNNs/src/train_baysian.py",
+  "codePath": "src/train_baysian.py",
+  "codePathLocal": "src/train_baysian.py",
+  "git": {
+    "remote": "https://github.com/philipkierkegaard/02456-MD-with-GNNs",
+    "commit": "98f7ca87d88acba8b965fc9e7fe0ff848565e110"
+  },
+  "email": "Eliasrasmussen12345@gmail.com",
+  "root": "/home/lyngsberg/deepLearning/02456-MD-with-GNNs",
+  "host": "DESKTOP-KTB5R6K",
+  "executable": "/home/lyngsberg/miniconda3/envs/deepLearning/bin/python",
+  "cpu_count": 6,
+  "cpu_count_logical": 12,
+  "gpu": "NVIDIA GeForce GTX 1050 Ti with Max-Q Design",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "1081101176832",
+      "used": "150131200000"
+    }
+  },
+  "memory": {
+    "total": "16619081728"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce GTX 1050 Ti with Max-Q Design",
+      "memoryTotal": "4294967296",
+      "architecture": "Pascal",
+      "uuid": "GPU-e602dbe2-dd99-6d8a-834e-2d4415ce4df5"
+    }
+  ],
+  "cudaVersion": "12.0",
+  "writerId": "ltvrwqexv0xgw2sd4zkbtz2o0bgmlcqs"
+}

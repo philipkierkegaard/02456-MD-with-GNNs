@@ -1,0 +1,17 @@
+{
+  "os": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "CPython 3.12.11",
+  "startedAt": "2025-11-30T20:18:34.293048Z",
+  "program": "/home/lyngsberg/deepLearning/02456-MD-with-GNNs/src/train_baysian.py",
+  "codePath": "src/train_baysian.py",
+  "codePathLocal": "src/train_baysian.py",
+  "git": {
+    "remote": "https://github.com/philipkierkegaard/02456-MD-with-GNNs",
+    "commit": "98f7ca87d88acba8b965fc9e7fe0ff848565e110"
+  },
+  "email": "Eliasrasmussen12345@gmail.com",
+  "root": "/home/lyngsberg/deepLearning/02456-MD-with-GNNs",
+  "host": "DESKTOP-KTB5R6K",
+  "executable": "/home/lyngsberg/miniconda3/envs/deepLearning/bin/python",
+  "writerId": "ad9hika3dq5p0up6hufmscdr2cy4t0ph"
+}
