@@ -21,7 +21,7 @@ print("torch-cluster version:", torch_cluster.__version__)
 # 1️⃣  Hyperparameters
 # -------------------------------
 
-MOLECULE = "benzene2018_dft"
+MOLECULE = "md17_ethanol"
 DATA_ROOT = "data"
 CUTOFF = 5.0
 LR = 3e-4
@@ -174,8 +174,8 @@ for epoch in range(1, EPOCHS + 1):
 # -------------------------------
 # Final save
 # -------------------------------
-torch.save(model.state_dict(), "final_model.pth")
-wandb.save("final_model.pth")
+torch.save(model.state_dict(), "final_model_ethanol.pth")
+wandb.save("final_model_ethanol.pth")
 
 print("🎉 Training complete!")
 wandb.finish()
